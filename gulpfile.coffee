@@ -10,7 +10,7 @@ livereload  = require('gulp-livereload')
 # Project dependencies
 server      = require('./server')
 
-entryFile = './app/app.coffee'
+entryFile = './app/app.js'
 distPath = './public/js'
 bundleName = 'bundle.js'
 
