@@ -51,9 +51,13 @@ gulp.task 'prepareJs', () ->
     .pipe gulp.dest(distDeployPath + '/js')
 
 gulp.task 'prepareViews', () ->
-  gulp.src(['./views/*'])
+  gulp.src(['./views/**/*'])
     .pipe(gulp.dest(distDeployPath))
 
-gulp.task 'deploy', ['clean', 'prepareViews', 'prepareJs'], () ->
+gulp.task 'prepareStatic', () ->
+  gulp.src(['./static/**/*'])
+    .pipe(gulp.dest(distDeployPath))
+
+gulp.task 'deploy', ['clean', 'prepareViews', 'prepareJs', 'prepareStatic'], () ->
   gulp.src('./dist/**/*')
     .pipe(ghPages())
