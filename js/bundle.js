@@ -101,10 +101,11 @@ function Map (options) {
       });
     });
 
-    infowindow.setContent(btn);
+    infowindow.setContent(doc.children[0]);
 
     google.maps.event.addListener(marker, 'click', function () {
       infowindow.open(map, marker);
+      elementClass(btn).add('btn');
     });
   }
 
