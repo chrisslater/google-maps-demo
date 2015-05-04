@@ -2,12 +2,9 @@ express = require('express')
 
 app = express()
 
-app.set 'view engine', 'hbs'
-app.set 'views', __dirname + '/views'
+app.use express.static('views')
 app.use express.static('public')
-
-app.get '/', (req, res) ->
-	res.render 'index'
+app.use express.static('static')
 
 module.exports =
 	start: (options) ->

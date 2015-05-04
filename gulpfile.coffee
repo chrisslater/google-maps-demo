@@ -6,13 +6,18 @@ watchify    = require('watchify')
 browserify  = require('browserify')
 reactify    = require('coffee-reactify')
 livereload  = require('gulp-livereload')
+ghPages     = require('gulp-gh-pages')
+del         = require('del')
 
 # Project dependencies
 server      = require('./server')
 
-entryFile = './app/app.coffee'
+entryFile = './app/app.js'
 distPath = './public/js'
 bundleName = 'bundle.js'
+
+# Deploy settings.
+distDeployPath = './dist'
 
 bundler = watchify browserify(entryFile, watchify.args)
 bundler.transform(reactify)
@@ -36,3 +41,23 @@ gulp.task 'develop', ['server'], () ->
 
 gulp.task 'server', () ->
   server.start()
+
+gulp.task 'clean', (cb) ->
+  del ['./dist/**/*'], cb
+
+gulp.task 'prepareJs', () ->
+  browserify(entryFile).bundle()
+    .pipe source(bundleName)
+    .pipe gulp.dest(distDeployPath + '/js')
+
+gulp.task 'prepareViews', () ->
+  gulp.src(['./views/**/*'])
+    .pipe(gulp.dest(distDeployPath))
+
+gulp.task 'prepareStatic', () ->
+  gulp.src(['./static/**/*'])
+    .pipe(gulp.dest(distDeployPath))
+
+gulp.task 'deploy', ['clean', 'prepareViews', 'prepareJs', 'prepareStatic'], () ->
+  gulp.src('./dist/**/*')
+    .pipe(ghPages())
