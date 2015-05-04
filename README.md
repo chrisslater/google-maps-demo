@@ -1,13 +1,4 @@
-# Isomophic base application
-
-Shared base application for future isomorphic projects written in javascript.
-
-This application is using the following libraries:
-
-* Gulp
-* Express
-* Browserify
-* CoffeeScript
+# Google maps demo
 
 ## Usage
 
