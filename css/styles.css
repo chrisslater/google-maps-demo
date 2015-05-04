@@ -1,0 +1,44 @@
+html,
+body,
+#map-canvas {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.btn {
+  padding: 6px;
+  cursor: pointer;
+}
+
+.loading:before {
+  position: absolute;
+  display: block;
+  content: '';
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 1;
+}
+
+@-webkit-keyframes myrotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@-moz-keyframes myrotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes myrotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.loading:after {
+  display: block;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px;
+  margin-left: -25px;
+  border: solid 5px black;
+  content: '';
+  z-index: 2;
+  -webkit-animation: myrotate 1.5s linear 0s infinite;
+  animation: myrotate 1.5s linear 0s infinite;
+}
